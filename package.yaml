@@ -21,6 +21,13 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- text
+- filepath
+- containers
+
+extra-deps:
+  - acme-missiles-0.3 # not in the LTS
+
 
 library:
   source-dirs: src
@@ -46,3 +53,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - helloworld
+    - HUnit
