@@ -1,5 +1,5 @@
+## Create scaffolding
 stack new helloworld new-template
-
 
 ## REPL:
 ghci
