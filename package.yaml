@@ -53,4 +53,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - helloworld
-    - HUnit
+    - hspec

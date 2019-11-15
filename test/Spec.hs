@@ -1,9 +1,11 @@
-import Test.HUnit
+import Test.Hspec
+import Control.Exception (evaluate)
 
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = hspec $ do
+  describe "Prelude.read" $ do
+    it "can parse integers" $ do
+      read "10" `shouldBe` (10 :: Int)
 
-foo :: Int -> (Int, Int)
-foo x = (1, x)
-
-test1 = TestCase (assertEqual "for (foo 3)," (1,2) (foo 3))
+    it "can parse floating-point numbers" $ do
+      read "2.5" `shouldBe` (2.5 :: Float)

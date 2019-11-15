@@ -1,4 +1,5 @@
 .stack-work/
 helloworld.cabal
 .idea/
+dist-newstyle/cache/
 *~
