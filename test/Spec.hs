@@ -3,6 +3,7 @@
 import Test.Hspec
 import Control.Exception (evaluate)
 import Data.List.Split
+import System.Info
 import qualified Data.ByteString.Lazy.Char8 as L8
 import           Network.HTTP.Simple
 
@@ -28,3 +29,9 @@ main = hspec $ do
       print $ getResponseHeader "Content-Type" response
       L8.putStrLn $ getResponseBody response
 
+    it "can get info about the system" $ do
+      os `shouldBe` ("darwin" :: String)
+      print os
+      print arch
+      print compilerName
+      print compilerVersion
