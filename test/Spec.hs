@@ -9,7 +9,21 @@ import           Network.HTTP.Simple
 
 main :: IO ()
 main = hspec $ do
+  describe "init, last, head, tail" $ do
+    it "can get head" $ do
+          let list = [1, 2, 3, 4, 9, 10, 11]
+          head list `shouldBe` 1
+          init list `shouldBe` [1, 2, 3, 4, 9, 10]
+
   describe "Prelude.read" $ do
+    it "can concat two lists" $ do
+        let lists = [1, 2, 3, 4] ++ [9,10, 11]
+        lists `shouldBe` [1, 2, 3, 4, 9, 10, 11]
+
+    it "can concat two strings" $ do
+        let text = "hello" ++ "world"
+        text `shouldBe` "helloworld"
+
     it "can parse integers" $ do
       read "10" `shouldBe` (10 :: Int)
 
@@ -21,13 +35,13 @@ main = hspec $ do
       putStrLn list
       print $ splitOn "|" list
 
-    it "can request http" $ do
-      response <- httpLBS "http://elpais.com"
-
-      putStrLn $ "The status code was: " ++
-                 show (getResponseStatusCode response)
-      print $ getResponseHeader "Content-Type" response
-      L8.putStrLn $ getResponseBody response
+--    it "can request http" $ do
+--      response <- httpLBS "http://elpais.com"
+--
+--      putStrLn $ "The status code was: " ++
+--                 show (getResponseStatusCode response)
+--      print $ getResponseHeader "Content-Type" response
+--      L8.putStrLn $ getResponseBody response
 
     it "can get info about the system" $ do
       os `shouldBe` ("darwin" :: String)
