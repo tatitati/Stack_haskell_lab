@@ -24,9 +24,14 @@ dependencies:
 - text
 - filepath
 - containers
+- http-client
+- time
+- http-conduit
+- bytestring
 
 extra-deps:
   - acme-missiles-0.3 # not in the LTS
+  - HTTP-Simple
 
 
 library:
