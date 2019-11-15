@@ -12,15 +12,15 @@ main = hspec $ do
 
   describe "functions" $ do
     it "can create a function" $ do
---       removewhatever :: [Char] -> [Char]
---       removeNonUppercase input = [c | c <- input, c `elem` ['A'..'Z']]
---
---       let r = removewhatever ['A', 'a']
---       putStrLn r
+       let mysum :: (Num a) => a -> a
+           mysum x = x + 1
+
+       mysum 5 `shouldBe` (6 :: Int)
+       mysum 5 `shouldBe` 6
 
 
-  describe "for comprehensions" $ do
-    it "can create one for{}" $ do
+--  describe "for comprehensions" $ do
+--    it "can create one for{}" $ do
 --           let result = [x*2 | x <- [1..10]]
 --           putStrLn result
 
