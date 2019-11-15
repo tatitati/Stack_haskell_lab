@@ -1,5 +1,6 @@
 import Test.Hspec
 import Control.Exception (evaluate)
+import Data.List.Split
 
 main :: IO ()
 main = hspec $ do
@@ -9,3 +10,8 @@ main = hspec $ do
 
     it "can parse floating-point numbers" $ do
       read "2.5" `shouldBe` (2.5 :: Float)
+
+    it "can read and parse a file" $ do
+      list <- readFile("src/table.txt")
+      putStrLn list
+      print $ splitOn "|" list
