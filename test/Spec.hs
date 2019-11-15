@@ -1,6 +1,10 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 import Test.Hspec
 import Control.Exception (evaluate)
 import Data.List.Split
+import qualified Data.ByteString.Lazy.Char8 as L8
+import           Network.HTTP.Simple
 
 main :: IO ()
 main = hspec $ do
@@ -15,3 +19,12 @@ main = hspec $ do
       list <- readFile("src/table.txt")
       putStrLn list
       print $ splitOn "|" list
+
+    it "can request http" $ do
+      response <- httpLBS "http://elpais.com"
+
+      putStrLn $ "The status code was: " ++
+                 show (getResponseStatusCode response)
+      print $ getResponseHeader "Content-Type" response
+      L8.putStrLn $ getResponseBody response
+
