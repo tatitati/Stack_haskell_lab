@@ -12,6 +12,7 @@ main = hspec $ do
 
   describe "functions" $ do
     it "can create a function" $ do
+--       let mysum :: Int -> Int  =====> this is not polymorphic, so in the test we wouldn't need to assert the type
        let mysum :: (Num a) => a -> a
            mysum x = x + 1
 
