@@ -50,16 +50,16 @@ main = hspec $ do
 
     it "can read and parse a file" $ do
       list <- readFile("src/table.txt")
-      putStrLn list
+      putStrLn list      
       print $ splitOn "|" list
 
---    it "can request http" $ do
---      response <- httpLBS "http://elpais.com"
---
---      putStrLn $ "The status code was: " ++
---                 show (getResponseStatusCode response)
---      print $ getResponseHeader "Content-Type" response
---      L8.putStrLn $ getResponseBody response
+    it "can request http" $ do
+      response <- httpLBS "http://elpais.com"
+
+      putStrLn $ "The status code was: " ++
+                  show (getResponseStatusCode response)
+      print $ getResponseHeader "Content-Type" response
+      L8.putStrLn $ getResponseBody response
 
     it "can get info about the system" $ do
       os `shouldBe` ("darwin" :: String)
