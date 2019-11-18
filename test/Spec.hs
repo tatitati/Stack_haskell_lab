@@ -7,11 +7,10 @@ import Data.List.Split
 import System.Info
 import qualified Data.ByteString.Lazy.Char8 as L8
 import           Network.HTTP.Simple{-# LANGUAGE BlockArguments #-}
-import Types
+import MyTypes
 
 main :: IO ()
 main = hspec $ do
-
 
   describe "functions" $ do
     it "can create a function" $ do
@@ -21,6 +20,13 @@ main = hspec $ do
 
        mysum 5 `shouldBe` (6 :: Int)
        mysum 5 `shouldBe` 6
+
+    it "can create a Person-data" $ do
+      let personRecordSyntax = Person {firstname="francisco", lastname="something", age=23}       
+      let personInstanceType = Person2 "francisco" "someting" 23
+
+      putStrLn $ show personRecordSyntax -- Person {firstname = "francisco", lastname = "something", age = 23}
+      putStrLn $ show personInstanceType -- Person2 "francisco" "someting" 23
 
 
 --  describe "for comprehensions" $ do
@@ -52,24 +58,26 @@ main = hspec $ do
       read "2.5" `shouldBe` (2.5 :: Float)
 
     it "can read and parse a file" $ do
-      list <- readFile("src/table.txt")
+      list <- readFile("src/table.txt") -- List : IO[String]
+      
+
       putStrLn list      
       print $ splitOn "|" list
 
-    it "can request http" $ do
-      response <- httpLBS "http://elpais.com"
+    -- it "can request http" $ do
+    --   response <- httpLBS "http://elpais.com"
 
-      putStrLn $ "The status code was: " ++
-                  show (getResponseStatusCode response)
-      print $ getResponseHeader "Content-Type" response
-      L8.putStrLn $ getResponseBody response
+    --   putStrLn $ "The status code was: " ++
+    --               show (getResponseStatusCode response)
+    --   print $ getResponseHeader "Content-Type" response
+    --   L8.putStrLn $ getResponseBody response
 
     it "Maybe is the Option in scala" $ do
       let b = Just "whatever"
 
       let res = case b of
-            Just val -> "There is a value, and it is " ++ (show val)
-            Nothing  -> "There is nothing!"
+              Just val -> "There is a value, and it is " ++ (show val)
+              Nothing  -> "There is nothing!"
 
       res `shouldBe` "There is a value, and it is \"whatever\""
       
