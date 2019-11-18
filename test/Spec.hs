@@ -15,13 +15,13 @@ main = hspec $ do
   describe "functions" $ do
     it "can create a function" $ do
 --       let mysum :: Int -> Int  =====> this is not polymorphic, so in the test we wouldn't need to assert the type
-       let mysum :: (Num a) => a -> a
-           mysum x = x + 1
+      let mysum :: (Num a) => a -> a
+          mysum x = x + 1
 
-       mysum 5 `shouldBe` (6 :: Int)
-       mysum 5 `shouldBe` 6
+      mysum 5 `shouldBe` (6 :: Int)
+      mysum 5 `shouldBe` 6
 
-    it "can create a Person-data" $ do
+    it "can create a Person using different syntaxes" $ do
       let personRecordSyntax = Person {firstname="francisco", lastname="something", age=23}       
       let personInstanceType = Person2 "francisco" "someting" 23
 
@@ -36,20 +36,20 @@ main = hspec $ do
 
   describe "init, last, head, tail, ranges" $ do
     it "can get head" $ do
-          let mylist = [1, 2, 3, 4, 9, 10, 11]
-          let myrange = [1..20]
-          head mylist `shouldBe` 1
-          init mylist `shouldBe` [1, 2, 3, 4, 9, 10]
-          length myrange `shouldBe` 20
+      let mylist = [1, 2, 3, 4, 9, 10, 11]
+      let myrange = [1..20]
+      head mylist `shouldBe` 1
+      init mylist `shouldBe` [1, 2, 3, 4, 9, 10]
+      length myrange `shouldBe` 20
 
   describe "Prelude.read" $ do
     it "can concat two lists" $ do
-        let lists = [1, 2, 3, 4] ++ [9,10, 11]
-        lists `shouldBe` [1, 2, 3, 4, 9, 10, 11]
+      let lists = [1, 2, 3, 4] ++ [9,10, 11]
+      lists `shouldBe` [1, 2, 3, 4, 9, 10, 11]
 
     it "can concat two strings" $ do
-        let text = "hello" ++ "world"
-        text `shouldBe` "helloworld"
+      let text = "hello" ++ "world"
+      text `shouldBe` "helloworld"
 
     it "can parse integers" $ do
       read "10" `shouldBe` (10 :: Int)
@@ -83,7 +83,17 @@ main = hspec $ do
       
     it "can get info about the system" $ do
       os `shouldBe` ("darwin" :: String)
-      print os
-      print arch
-      print compilerName
-      print compilerVersion
+      -- These variables access to the system, but why they return String instead of IO String?
+      -- the reason is because these values are hardcoded in the compiler when this is installed
+      print os                -- :: String
+      print arch              -- :: String
+      print compilerName      -- :: String
+      print compilerVersion   -- :: String
+
+    it "type synonimous/alias" $ do
+      let information = "something" :: Surname
+
+      information `shouldBe` ("something" :: Surname)
+      information `shouldBe` ("something" :: String)
+
+      

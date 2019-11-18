@@ -7,5 +7,7 @@ module MyTypes where
 
     data Person2 = Person2 String String Int deriving (Show)
 
+    type Surname = String
+
 
     
