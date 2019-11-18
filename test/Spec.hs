@@ -68,8 +68,8 @@ main = hspec $ do
       let b = Just "whatever"
 
       let res = case b of
-              Just val -> "There is a value, and it is " ++ (show val)
-              Nothing  -> "There is nothing!"
+            Just val -> "There is a value, and it is " ++ (show val)
+            Nothing  -> "There is nothing!"
 
       res `shouldBe` "There is a value, and it is \"whatever\""
       
