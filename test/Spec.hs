@@ -1,14 +1,17 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE BlockArguments #-}
 
 import Test.Hspec
 import Control.Exception (evaluate)
 import Data.List.Split
 import System.Info
 import qualified Data.ByteString.Lazy.Char8 as L8
-import           Network.HTTP.Simple
+import           Network.HTTP.Simple{-# LANGUAGE BlockArguments #-}
+import Types
 
 main :: IO ()
 main = hspec $ do
+
 
   describe "functions" $ do
     it "can create a function" $ do
@@ -61,6 +64,15 @@ main = hspec $ do
       print $ getResponseHeader "Content-Type" response
       L8.putStrLn $ getResponseBody response
 
+    it "Maybe is the Option in scala" $ do
+      let b = Just "whatever"
+
+      let res = case b of
+              Just val -> "There is a value, and it is " ++ (show val)
+              Nothing  -> "There is nothing!"
+
+      res `shouldBe` "There is a value, and it is \"whatever\""
+      
     it "can get info about the system" $ do
       os `shouldBe` ("darwin" :: String)
       print os
