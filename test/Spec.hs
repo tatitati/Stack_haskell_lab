@@ -8,6 +8,7 @@ import System.Info
 import qualified Data.ByteString.Lazy.Char8 as L8
 import           Network.HTTP.Simple{-# LANGUAGE BlockArguments #-}
 import MyTypes
+import Debug.Trace
 
 main :: IO ()
 main = hspec $ do
@@ -28,6 +29,13 @@ main = hspec $ do
       putStrLn $ show personRecordSyntax -- Person {firstname = "francisco", lastname = "something", age = 23}
       putStrLn $ show personInstanceType -- Person2 "francisco" "someting" 23
 
+    it "Research about the signature of a simple function that sum up +1 to a number" $ do
+      let mysum :: (Num a) => a -> IO a                    
+          mysum x = do
+            putStrLn "some output here"
+            return (x + 1)
+
+      mysum 5 `shouldReturn` 6
 
 --  describe "for comprehensions" $ do
 --    it "can create one for{}" $ do
@@ -88,7 +96,8 @@ main = hspec $ do
       print os                -- :: String
       print arch              -- :: String
       print compilerName      -- :: String
-      print compilerVersion   -- :: String
+      print compilerVersion   -- :: String    
+
 
     it "type synonimous/alias" $ do
       let information = "something" :: Surname
